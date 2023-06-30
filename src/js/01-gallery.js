@@ -2,8 +2,8 @@
 import { galleryItems } from './gallery-items';
 // Change code below this line
 
-// import SimpleLightbox from 'simplelightbox';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 const galleryMarkup = createMarkup(galleryItems);
@@ -23,10 +23,20 @@ function createMarkup(galleryItems) {
     .join('');
 }
 
+gallery.addEventListener('click', onClick);
+
+function onClick(e) {
+  e.preventDefault();
+
+  const { target } = e;
+
+  if (!target.classList.contains('gallery__image')) {
+    return;
+  }
+}
+
 let modalImg = new SimpleLightbox('.gallery a', {
   doubleTapZoom: '1.5',
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-
